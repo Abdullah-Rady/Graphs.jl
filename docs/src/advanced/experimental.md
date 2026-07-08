@@ -19,6 +19,7 @@ Modules = [Graphs.Experimental, Graphs.Experimental.Traversals, Graphs.Experimen
 Pages = [
     "Experimental/Experimental.jl",
     "Experimental/isomorphism.jl",
+    "Experimental/color_refinement.jl",
     "Experimental/vf2.jl",
     "Experimental/Parallel/traversals/gdistances.jl",
     "Experimental/Parallel/Parallel.jl",
