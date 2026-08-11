@@ -58,8 +58,7 @@ end
         end
         c1 = canonical_color_refinement(g1, ones(Int, nv(g1)), [1])
         c2 = canonical_color_refinement(g2, ones(Int, nv(g2)), [1])
-        @test sort([count(==(x), c1) for x in unique(c1)]) ==
-            sort([count(==(x), c2) for x in unique(c2)])
+        @test sort([count(==(x), c1) for x in unique(c1)]) == sort([count(==(x), c2) for x in unique(c2)])
     end
 
     @testset "Directed path is fully distinguished" begin
@@ -141,11 +140,15 @@ end
     end
 
     @testset "Rejects wrong-length alpha" begin
-        @test_throws ArgumentError canonical_color_refinement(path_graph(3), ones(Int, 2), [1])
+        @test_throws ArgumentError canonical_color_refinement(
+            path_graph(3), ones(Int, 2), [1]
+        )
     end
 
     @testset "Rejects seed labels absent from alpha" begin
-        @test_throws ArgumentError canonical_color_refinement(path_graph(3), ones(Int, 3), [2])
+        @test_throws ArgumentError canonical_color_refinement(
+            path_graph(3), ones(Int, 3), [2]
+        )
     end
 
     @testset "Empty seed set leaves the initial coloring unchanged" begin
@@ -205,7 +208,8 @@ end
         g_multi = path_graph(7)
         alpha_multi = [1, 1, 2, 2, 2, 3, 3]
         c = canonical_color_refinement(g_multi, alpha_multi, [1, 2, 3])
-        @test length(unique(c)) == length(unique(_naive_stable_coloring(g_multi, alpha_multi)))
+        @test length(unique(c)) ==
+            length(unique(_naive_stable_coloring(g_multi, alpha_multi)))
     end
 
     @testset "Complete bipartite graph" begin

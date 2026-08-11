@@ -80,7 +80,9 @@ function canonical_color_refinement(
     for c in S
         label = Int(c)
         if !haskey(color_to_id, label)
-            throw(ArgumentError("Refinement seeds S must contain color ids present in alpha"))
+            throw(
+                ArgumentError("Refinement seeds S must contain color ids present in alpha")
+            )
         end
         push!(seed_ids, color_to_id[label])
     end
@@ -170,18 +172,7 @@ function canonical_color_refinement(
         # 3. Split each color class by color degree (SplitUpColour).
         for s in Colorssplit
             k = _split_up_colour!(
-                s,
-                k,
-                C,
-                A,
-                colour,
-                cdeg,
-                maxcdeg,
-                mincdeg,
-                numcdeg,
-                f,
-                Srefine,
-                in_stack,
+                s, k, C, A, colour, cdeg, maxcdeg, mincdeg, numcdeg, f, Srefine, in_stack
             )
         end
 
@@ -218,7 +209,9 @@ end
 
 Return the stable coloring of `g` using the unit coloring and refining color class 1.
 """
-canonical_color_refinement(g::AbstractGraph) = canonical_color_refinement(g, ones(Int, nv(g)), [1])
+function canonical_color_refinement(g::AbstractGraph)
+    canonical_color_refinement(g, ones(Int, nv(g)), [1])
+end
 
 """
     canonical_color_refinement(g, alpha)
@@ -226,8 +219,9 @@ canonical_color_refinement(g::AbstractGraph) = canonical_color_refinement(g, one
 Return the stable coloring of `g` using the provided initial coloring `alpha` and the
 unit refinement seed `[1]`.
 """
-canonical_color_refinement(g::AbstractGraph, alpha::AbstractVector{<:Integer}) =
+function canonical_color_refinement(g::AbstractGraph, alpha::AbstractVector{<:Integer})
     canonical_color_refinement(g, alpha, [1])
+end
 
 """
     canonical_color_refinement(g, alpha, S)
@@ -235,9 +229,11 @@ canonical_color_refinement(g::AbstractGraph, alpha::AbstractVector{<:Integer}) =
 Return the stable coloring of `g` using the provided initial coloring `alpha` and a
 scalar refinement seed `S`.
 """
-canonical_color_refinement(
+function canonical_color_refinement(
     g::AbstractGraph, alpha::AbstractVector{<:Integer}, S::Integer
-) = canonical_color_refinement(g, alpha, [S])
+)
+    canonical_color_refinement(g, alpha, [S])
+end
 
 """
     canonical_color_refinement(g, S)
@@ -245,8 +241,9 @@ canonical_color_refinement(
 Return the stable coloring of `g` using the unit coloring and refining the provided
 seed color.
 """
-canonical_color_refinement(g::AbstractGraph, S::Integer) =
+function canonical_color_refinement(g::AbstractGraph, S::Integer)
     canonical_color_refinement(g, ones(Int, nv(g)), [S])
+end
 
 """
     color_refinement(g, alpha, S)
@@ -273,8 +270,9 @@ color_refinement(g::AbstractGraph) = color_refinement(g, ones(Int, nv(g)), [1])
 Convenience wrapper that uses the provided initial coloring `alpha` and the unit
 refinement seed `[1]`.
 """
-color_refinement(g::AbstractGraph, alpha::AbstractVector{<:Integer}) =
+function color_refinement(g::AbstractGraph, alpha::AbstractVector{<:Integer})
     color_refinement(g, alpha, [1])
+end
 
 """
     color_refinement(g, alpha, S)
@@ -282,8 +280,9 @@ color_refinement(g::AbstractGraph, alpha::AbstractVector{<:Integer}) =
 Convenience wrapper that accepts a scalar refinement seed and builds the
 corresponding one-element seed vector.
 """
-color_refinement(g::AbstractGraph, alpha::AbstractVector{<:Integer}, S::Integer) =
+function color_refinement(g::AbstractGraph, alpha::AbstractVector{<:Integer}, S::Integer)
     color_refinement(g, alpha, [S])
+end
 
 """
     color_refinement(g, S)
